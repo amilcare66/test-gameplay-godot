@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed: float = 3.0
+@export var speed: float = 2.5
 @export var damage: int = 15
 
 var player: Node3D
@@ -10,11 +10,27 @@ var attack_cooldown: float = 0.0
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 var base_color: Color
+var target_marker: Label3D
 
 func _ready() -> void:
+	add_to_group("enemy") # Автоматически добавляем врага в группу enemy
 	player = get_tree().get_first_node_in_group("player")
 	if mesh.get_active_material(0):
 		base_color = mesh.get_active_material(0).albedo_color
+		
+	# Создаем прицельную метку над головой врага
+	target_marker = Label3D.new()
+	target_marker.text = "▼ ЦЕЛЬ ▼"
+	target_marker.font_size = 48
+	target_marker.modulate = Color.YELLOW
+	target_marker.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	target_marker.position = Vector3(0, 1.6, 0)
+	target_marker.visible = false
+	add_child(target_marker)
+
+func set_targeted(is_targeted: bool) -> void:
+	if target_marker:
+		target_marker.visible = is_targeted
 
 func _physics_process(delta: float) -> void:
 	if not is_inside_tree():
@@ -54,7 +70,7 @@ func take_damage(amount: int) -> void:
 	print("Враг ранен! HP: ", health)
 	
 	if health <= 0:
-		queue_free() # Умираем сразу, не ждем конца мигания!
+		queue_free()
 		return
 	
 	var mat := mesh.get_active_material(0) as StandardMaterial3D

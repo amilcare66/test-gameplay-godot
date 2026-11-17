@@ -50,7 +50,13 @@ use_collision = true
 size = Vector3(302.7796, 3, 1)
 
 [node name="Player" parent="." unique_id=641626533 instance=ExtResource("1_o84i3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4505196, 0.23072243, -2.4285297)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.451, 0.231, 0)
 
 [node name="Enemy" parent="." unique_id=1247843917 instance=ExtResource("2_gdwk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.091734886, 0.21494198, -2.7745914)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.092, 0.215, 0)
+
+[node name="Enemy2" parent="." unique_id=426188484 instance=ExtResource("2_gdwk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.215, 0)
+
+[node name="Enemy3" parent="." unique_id=1242359523 instance=ExtResource("2_gdwk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.215, 0)
